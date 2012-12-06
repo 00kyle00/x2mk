@@ -18,6 +18,7 @@ CB_UP = 10
 CB_DOWN = 11
 CB_LEFT = 12
 CB_RIGHT = 13
+CB_GUIDE = 14
 
 -- keyboard virtual keys 
 -- see http://msdn.microsoft.com/en-us/library/windows/desktop/dd375731%28v=vs.85%29.aspx

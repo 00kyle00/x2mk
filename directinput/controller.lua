@@ -2,12 +2,15 @@ require "constants"
 
 -- Function is invoked whenever state of controller button is changed
 function button_changed(btn)
-  local btn_state = Controller.button(btn);
+  local btn_state = Controller.button(btn)
+  local value = btn_state and 1 or 0
+
   if     btn == CB_A then Mouse.press_release(MB_L, btn_state)
   elseif btn == CB_B then Mouse.press_release(MB_R, btn_state)
   elseif btn == CB_BCK then Keyboard.press_release(VK_ESCAPE, btn_state)
   elseif btn == CB_X then Mouse.press_release(MB_M, btn_state)
   elseif btn == CB_Y then Keyboard.press_release(VK_BROWSER_REFRESH, btn_state)
+  elseif btn == CB_GUIDE then Controller.rumble(value, value)
   end
 end
 
@@ -16,8 +19,8 @@ end
 function tick()
   Mouse.move(Controller.stick(0), 0.15, 5);
   Mouse.move(Controller.stick(1), 0.15, 15);
-  --Mouse.wheel(Controller.trigger(0) - Controller.trigger(1), 0.01, 50)
-  Controller.rumble(Controller.trigger(0), Controller.trigger(1))
+  Mouse.wheel(Controller.trigger(0) - Controller.trigger(1), 0.01, 50)
+  --Controller.rumble(Controller.trigger(0), Controller.trigger(1))
 end
 
 --[[

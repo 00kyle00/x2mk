@@ -6,11 +6,10 @@
 #include <cassert>
 #include "virtual_devices.h"
 #include "state.h"
-
 #include <Xinput.h>
-#pragma comment(lib, "dinput8.lib")
+
 #pragma comment(lib, "dxguid.lib")
-#pragma comment(lib, "xinput9_1_0.lib")
+#pragma comment(lib, "dinput8.lib")
 
 namespace {
 
@@ -113,12 +112,12 @@ void input_from_device_state(const XINPUT_STATE& istate, InputState& ostate) {
   ostate.triggers[0] = istate.Gamepad.bLeftTrigger / 255.0f;
   ostate.triggers[1] = istate.Gamepad.bRightTrigger / 255.0f;
 
-  WORD masks[] = { 
+  const WORD masks[16] = { 
     XINPUT_GAMEPAD_A, XINPUT_GAMEPAD_B, XINPUT_GAMEPAD_X, XINPUT_GAMEPAD_Y,
     XINPUT_GAMEPAD_LEFT_SHOULDER, XINPUT_GAMEPAD_RIGHT_SHOULDER, XINPUT_GAMEPAD_BACK,
     XINPUT_GAMEPAD_START, XINPUT_GAMEPAD_LEFT_THUMB, XINPUT_GAMEPAD_RIGHT_THUMB,
     XINPUT_GAMEPAD_DPAD_UP, XINPUT_GAMEPAD_DPAD_DOWN, XINPUT_GAMEPAD_DPAD_LEFT,
-    XINPUT_GAMEPAD_DPAD_RIGHT };
+    XINPUT_GAMEPAD_DPAD_RIGHT, 1024 };  //1024 for guide button
 
   for(int i = 0; i < 16; ++i)
     ostate.buttons[i] = (istate.Gamepad.wButtons & masks[i]) != 0;
@@ -160,17 +159,34 @@ private:
   std::shared_ptr<void> acquire_guard_;
 };
 
+namespace {
+template<class T>
+void set_ptr(T& obj, void* value) {
+  obj = (T) value;
+}
+HMODULE xinput;
+int (__stdcall *XInputOrdinal100)(DWORD, XINPUT_STATE*);
+int (__stdcall *XInputSetState)(DWORD, XINPUT_VIBRATION*);
+}
+
 class ControllerXInput : public Controller {
 public:
   ControllerXInput(int id) : id_(id) {
     if(id < 0 || id > 3)
       throw std::runtime_error("bad xinput controller id");
+
+    if(xinput == 0) {
+      xinput = LoadLibrary(L"xinput1_3.dll");
+      set_ptr(XInputOrdinal100, GetProcAddress(xinput, (LPCSTR)100));
+      set_ptr(XInputSetState, GetProcAddress(xinput, "XInputSetState"));
+      if( XInputOrdinal100 == 0 || XInputSetState == 0)
+        throw std::runtime_error("failed to load xinput funcitons");
+    }
   }
 
   void query_state(InputState& input) {
     XINPUT_STATE state = {};
-    XInputGetState(id_, &state);
-
+    XInputOrdinal100(id_, &state);
     input_from_device_state(state, input);
   }
 
