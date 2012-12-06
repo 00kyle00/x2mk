@@ -73,6 +73,16 @@ int lua_get_stick(lua_State* L) {
 
   return 1;
 }
+int lua_set_rumble(lua_State* L) {
+  int top = lua_gettop(L);
+  if(top != 2) luaL_error(L, "invalid number of parameters");
+  
+  float left = lua_tonumber(L, 1);
+  float right = lua_tonumber(L, 2);
+  glob->ctl->rumble(left, right);
+
+  return 0;
+}
 void register_controler_state(lua_State *L) {
   const luaL_Reg funcs[] = {
     {"trigger", lua_get_trigger},
@@ -80,6 +90,7 @@ void register_controler_state(lua_State *L) {
     {"stick_x", lua_get_stick_x},
     {"stick_y", lua_get_stick_y},
     {"stick", lua_get_stick},
+    {"rumble", lua_set_rumble},
     {0, 0}
   };
   luaL_newlib(L, funcs);

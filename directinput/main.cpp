@@ -36,13 +36,16 @@ int main() {
     if(devnum >= devices.size())
       throw std::runtime_error("bad device number");
 
-    Controller ctl(dinput, devices[devnum]);
+    bool use_xinput = true;
+    auto ctl = use_xinput ? Controller::Create(devnum) :
+      Controller::Create(dinput, devices[devnum]);
+
     VirtualMouse mouse;
     VirtualKeyboard keyboard;
     InputState state = {};
 
     ProgramState prog_state = {
-      &state, &ctl, &keyboard, &mouse };
+      &state, ctl.get(), &keyboard, &mouse };
 
     auto L = CreateLua(&prog_state);
     ExecuteScript(L, "controller.lua");
@@ -50,7 +53,7 @@ int main() {
     while(true) {
       // Gather state.
       InputState& input = *prog_state.state;
-      ctl.query_state(input);
+      ctl->query_state(input);
       static InputState old_input = input;
 
       // Notify about changed buttons.

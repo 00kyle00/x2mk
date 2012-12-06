@@ -14,6 +14,10 @@ CB_BCK = 6
 CB_STA = 7
 CB_L = 8
 CB_R = 9
+CB_UP = 10
+CB_DOWN = 11
+CB_LEFT = 12
+CB_RIGHT = 13
 
 -- keyboard virtual keys 
 -- see http://msdn.microsoft.com/en-us/library/windows/desktop/dd375731%28v=vs.85%29.aspx

@@ -16,7 +16,8 @@ end
 function tick()
   Mouse.move(Controller.stick(0), 0.15, 5);
   Mouse.move(Controller.stick(1), 0.15, 15);
-  Mouse.wheel(Controller.trigger(0) - Controller.trigger(1), 0.01, 50);
+  --Mouse.wheel(Controller.trigger(0) - Controller.trigger(1), 0.01, 50)
+  Controller.rumble(Controller.trigger(0), Controller.trigger(1))
 end
 
 --[[
