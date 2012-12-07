@@ -1,16 +1,27 @@
 require "constants"
 
+function spawn(what)
+  return os.execute('%windir%\\Sysnative\\cmd.exe /c start ' .. what)
+end
+
 -- Function is invoked whenever state of controller button is changed
 function button_changed(btn)
   local btn_state = Controller.button(btn)
   local value = btn_state and 1 or 0
 
+  -- execute on press and release
   if     btn == CB_A then Mouse.press_release(MB_L, btn_state)
   elseif btn == CB_B then Mouse.press_release(MB_R, btn_state)
   elseif btn == CB_BCK then Keyboard.press_release(VK_ESCAPE, btn_state)
   elseif btn == CB_X then Mouse.press_release(MB_M, btn_state)
   elseif btn == CB_Y then Keyboard.press_release(VK_BROWSER_REFRESH, btn_state)
   elseif btn == CB_GUIDE then Controller.rumble(value, value)
+  end
+
+  -- execute only on press
+  if btn_state then
+    if btn == CB_GUIDE then spawn('notepad.exe') end
+	if btn == CB_RB then spawn('osk.exe') end
   end
 end
 
