@@ -1,4 +1,5 @@
 #include "virtual_devices.h"
+
 #include <cstdlib>
 #include <cassert>
 

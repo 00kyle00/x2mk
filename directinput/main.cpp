@@ -1,3 +1,9 @@
+#include "virtual_devices.h"
+#include "controller.h"
+#include "luabind.h"
+#include "state.h"
+#include "window.h"
+
 #include <memory>
 #include <cstdlib>
 #include <vector>
@@ -5,11 +11,6 @@
 #include <algorithm>
 #include <iostream>
 #include <stdexcept>
-#include "virtual_devices.h"
-#include "controller.h"
-#include "luabind.h"
-#include "state.h"
-#include "window.h"
 
 void print_exception_info() {
   try {

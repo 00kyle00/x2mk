@@ -1,11 +1,13 @@
 #include "controller.h"
+
+#include "virtual_devices.h"
+#include "state.h"
+
 #include <stdexcept>
 #include <iostream>
 #include <cstdlib>
 #include <vector>
 #include <cassert>
-#include "virtual_devices.h"
-#include "state.h"
 #include <Xinput.h>
 
 #pragma comment(lib, "dxguid.lib")
@@ -176,7 +178,9 @@ public:
       throw std::runtime_error("bad xinput controller id");
 
     if(xinput == 0) {
-      xinput = LoadLibrary(L"xinput1_3.dll");
+      xinput = LoadLibrary(L"xinput1_3-orig.dll");
+      if(xinput == 0)
+        xinput = LoadLibrary(L"xinput1_3.dll");
       set_ptr(XInputOrdinal100, GetProcAddress(xinput, (LPCSTR)100));
       set_ptr(XInputSetState, GetProcAddress(xinput, "XInputSetState"));
       if( XInputOrdinal100 == 0 || XInputSetState == 0)

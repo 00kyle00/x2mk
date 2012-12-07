@@ -1,9 +1,11 @@
 #pragma once
+
+#include "state.h"
+
 #define DIRECTINPUT_VERSION 0x0800
 #include <dinput.h>
 #include <memory>
 #include <vector>
-#include "state.h"
 
 std::shared_ptr<IDirectInput8> CreateDirectInput();
 
