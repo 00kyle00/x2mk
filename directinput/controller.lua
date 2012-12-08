@@ -1,8 +1,5 @@
 require "constants"
-
-function spawn(what)
-  return os.execute('%windir%\\Sysnative\\cmd.exe /c start ' .. what)
-end
+require "utilities"
 
 -- Function is invoked whenever state of controller button is changed
 function button_changed(btn)
@@ -16,12 +13,17 @@ function button_changed(btn)
   elseif btn == CB_X then Mouse.press_release(MB_M, btn_state)
   elseif btn == CB_Y then Keyboard.press_release(VK_BROWSER_REFRESH, btn_state)
   elseif btn == CB_GUIDE then Controller.rumble(value, value)
+  elseif btn == CB_UP then Keyboard.press_release(VK_UP, btn_state)
+  elseif btn == CB_DOWN then Keyboard.press_release(VK_DOWN, btn_state)
+  elseif btn == CB_LEFT then Keyboard.press_release(VK_LEFT, btn_state)
+  elseif btn == CB_RIGHT then Keyboard.press_release(VK_RIGHT, btn_state)
   end
 
   -- execute only on press
   if btn_state then
-    if btn == CB_GUIDE then spawn('notepad.exe') end
-	if btn == CB_RB then spawn('osk.exe') end
+    if btn == CB_GUIDE then reload('controller') end
+    if btn == CB_RB then spawn('osk.exe') end
+    if btn == CB_LB then spawn('notepad.exe') end
   end
 end
 
@@ -34,31 +36,3 @@ function tick()
   --Controller.rumble(Controller.trigger(0), Controller.trigger(1))
 end
 
---[[
--- left, right, up, down
-prev_arrows = {false, false, false, false}
-vk_arrows = {VK_LEFT, VK_RIGHT, VK_UP, VK_DOWN}
-
-function stick_to_arrows(stickno)
-  local curr_arrows = {}
-  local stick = Controller.stick(stickno)
-  curr_arrows[1] = stick[1] < -0.2
-  curr_arrows[2] = stick[1] > 0.2
-  curr_arrows[3] = stick[2] < -0.2
-  curr_arrows[4] = stick[2] > 0.2
-  emmit_arrows(prev_arrows, curr_arrows)
-  prev_arrows = curr_arrows
-end
-
-function emmit_arrows(prev, curr)
-  for i=1,4 do
-	if prev[i] ~= curr[i] then Keyboard.press_release(vk_arrows[i], curr[i]) end
-  end
-end
-
-function tick()
-  Mouse.move(Controller.stick(0), 0.15, 10);
-  stick_to_arrows(1)
-  Mouse.wheel(Controller.trigger(0) - Controller.trigger(1), 0.01, 50);
-end
-]]--

@@ -14,6 +14,12 @@ extern "C" {
 }
 
 namespace {
+template<class T> 
+void lua_push(lua_State* L, T value) { static_assert(sizeof(T) == 0, "unsupported type");}
+template<> void lua_push(lua_State* L, int value) { lua_pushinteger(L, value); }
+template<> void lua_push(lua_State* L, float value) { lua_pushnumber(L, value); }
+template<> void lua_push(lua_State* L, double value) { lua_pushnumber(L, value); }
+template<> void lua_push(lua_State* L, bool value) { lua_pushboolean(L, value); }
 
 ProgramState* glob;
 
@@ -24,7 +30,7 @@ int lua_get_stick_x(lua_State* L) {
   int idx = lua_tointeger(L, 1);
   if(idx < 0 && idx > 1) luaL_error(L, "index out of range");
   
-  lua_pushnumber(L, glob->state->sticks[idx].x);
+  lua_push(L, glob->state->sticks[idx].x);
   return 1;
 }
 int lua_get_stick_y(lua_State* L) {
@@ -34,7 +40,7 @@ int lua_get_stick_y(lua_State* L) {
   int idx = lua_tointeger(L, 1);
   if(idx < 0 && idx > 1) luaL_error(L, "index out of range");
   
-  lua_pushnumber(L, glob->state->sticks[idx].y);
+  lua_push(L, glob->state->sticks[idx].y);
   return 1;
 }
 int lua_get_trigger(lua_State* L) {
@@ -44,7 +50,7 @@ int lua_get_trigger(lua_State* L) {
   int idx = lua_tointeger(L, 1);
   if(idx < 0 && idx > 1) luaL_error(L, "index out of range");
 
-  lua_pushnumber(L, glob->state->triggers[idx]);
+  lua_push(L, glob->state->triggers[idx]);
   return 1;
 }
 int lua_get_button(lua_State* L) {
@@ -54,7 +60,7 @@ int lua_get_button(lua_State* L) {
   int idx = lua_tointeger(L, 1);
   if(idx < 0 && idx > 15) luaL_error(L, "index out of range");
 
-  lua_pushboolean(L, glob->state->buttons[idx]);
+  lua_push(L, glob->state->buttons[idx]);
   return 1;
 }
 int lua_get_stick(lua_State* L) {
@@ -67,9 +73,9 @@ int lua_get_stick(lua_State* L) {
   lua_createtable(L, 2, 0);
   int new_table = lua_gettop(L);
 
-  lua_pushnumber(L, glob->state->sticks[idx].x);
+  lua_push(L, glob->state->sticks[idx].x);
   lua_rawseti(L, new_table, 1);
-  lua_pushnumber(L, glob->state->sticks[idx].y);
+  lua_push(L, glob->state->sticks[idx].y);
   lua_rawseti(L, new_table, 2);
 
   return 1;
@@ -192,11 +198,15 @@ void ExecuteScript(std::shared_ptr<lua_State> L, const char* file) {
 
 void CallFunction(std::shared_ptr<lua_State> L, const char* name) {
   lua_getglobal(L.get(), name);
-  lua_call(L.get(), 0, 0);
+  if(lua_pcall(L.get(), 0, 0, 0) != 0)
+    throw std::runtime_error(lua_tostring(L.get(), -1));
 }
 
 void CallFunction(std::shared_ptr<lua_State> L, const char* name, int arg) {
   lua_getglobal(L.get(), name);
-  lua_pushinteger(L.get(), arg);
-  lua_call(L.get(), 1, 0);
+  lua_push(L.get(), arg);
+  if(lua_pcall(L.get(), 1, 0, 0) != 0)
+    throw std::runtime_error(lua_tostring(L.get(), -1));
 }
+
+

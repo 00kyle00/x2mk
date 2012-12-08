@@ -159,5 +159,8 @@
     <None Include="constants.lua">
       <Filter>Scripts</Filter>
     </None>
+    <None Include="utilities.lua">
+      <Filter>Scripts</Filter>
+    </None>
   </ItemGroup>
 </Project>

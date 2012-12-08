@@ -130,6 +130,7 @@
   <ItemGroup>
     <None Include="constants.lua" />
     <None Include="controller.lua" />
+    <None Include="utilities.lua" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
