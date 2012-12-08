@@ -7,9 +7,9 @@
 namespace {
 
 void TrayIcon(HWND hWnd, bool add) {
-  NOTIFYICONDATA tray;
+  NOTIFYICONDATA tray = {};
   tray.cbSize = sizeof(tray);
-  tray.hIcon = LoadIcon(NULL, IDI_ASTERISK);
+  tray.hIcon = (HICON)LoadIcon(GetModuleHandle(0), (const wchar_t*)101);
   tray.hWnd = hWnd;
   tray.uCallbackMessage = WM_USER;
   tray.uFlags = NIF_ICON | NIF_MESSAGE;

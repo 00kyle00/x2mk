@@ -132,6 +132,12 @@
     <None Include="controller.lua" />
     <None Include="utilities.lua" />
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="directinput.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

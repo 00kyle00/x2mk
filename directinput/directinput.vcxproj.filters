@@ -9,109 +9,112 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="lua">
-      <UniqueIdentifier>{279d47ad-1bf7-4b5a-8608-5a9a0bb6ef26}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scripts">
       <UniqueIdentifier>{d5e7578d-f4e2-4538-920d-8e7fbd37756f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{1d55185d-5771-40c6-967a-f7be82f9f4c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\lua">
+      <UniqueIdentifier>{279d47ad-1bf7-4b5a-8608-5a9a0bb6ef26}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\lua-5.2.1\src\lapi.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\lauxlib.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\lbaselib.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\lbitlib.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\lcode.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\lcorolib.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\lctype.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\ldblib.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\ldebug.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\ldo.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\ldump.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\lfunc.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\lgc.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\linit.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\liolib.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\llex.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\lmathlib.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\lmem.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\loadlib.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\lobject.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\lopcodes.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\loslib.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\lparser.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\lstate.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\lstring.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\lstrlib.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\ltable.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\ltablib.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\ltm.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\lundump.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\lvm.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\lua-5.2.1\src\lzio.c">
-      <Filter>lua</Filter>
+      <Filter>Source Files\lua</Filter>
     </ClCompile>
     <ClCompile Include="luabind.cpp">
       <Filter>Source Files</Filter>
@@ -162,5 +165,15 @@
     <None Include="utilities.lua">
       <Filter>Scripts</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="directinput.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico">
+      <Filter>Resources</Filter>
+    </Image>
   </ItemGroup>
 </Project>

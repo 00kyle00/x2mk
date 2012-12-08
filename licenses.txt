@@ -1,0 +1,15 @@
+This software uses following components:
+
+Lua 5.2 taken from http://www.lua.org/
+License - (MIT) http://www.lua.org/license.html
+
+
+
+Specific parts:
+
+controller icon taken from http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Devices-input-gaming-icon.html
+License - (LGPL) http://www.gnu.org/licenses/lgpl.html
+
+
+
+Otherwise x2mk uses MIT license.
