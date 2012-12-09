@@ -1,5 +1,6 @@
 #include "window.h"
 
+#include <thread>
 #include <windows.h>
 #include <windowsx.h>
 #include <shellapi.h>
@@ -60,7 +61,7 @@ LRESULT CALLBACK WndProcedure(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
   return 0;
 }
 
-DWORD WINAPI ThreadFunction(void* data) {
+void ThreadFunction() {
   LPCTSTR className = L"dummy_class_name";
 	WNDCLASSEX wndclass;
 	wndclass.cbSize        = sizeof(WNDCLASSEX);
@@ -95,7 +96,7 @@ DWORD WINAPI ThreadFunction(void* data) {
 
 void SetupTray() {
   ShowWindow(GetConsoleWindow(), 0);
-  CreateThread(0, 0, &ThreadFunction, 0, 0, 0);
+  std::thread(ThreadFunction).detach();
   atexit(RemoveTrayIcon);
 }
 
