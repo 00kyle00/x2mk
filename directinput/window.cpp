@@ -1,9 +1,12 @@
 #include "window.h"
 
-#include <thread>
 #include <windows.h>
 #include <windowsx.h>
 #include <shellapi.h>
+
+#include <atomic>
+
+extern std::atomic<bool> gui_finished;
 
 namespace {
 
@@ -41,7 +44,7 @@ LRESULT CALLBACK WndProcedure(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
       int choice = TrackPopupMenu(hPopupMenu, TPM_BOTTOMALIGN | TPM_LEFTALIGN | TPM_NONOTIFY | TPM_RETURNCMD, 
         mouse.x, mouse.y, 0, hWnd, NULL);
       if(choice == 1) {
-        exit(0);
+        PostQuitMessage(WM_QUIT);
       }
       if(choice == 2) {
         static bool show = true;
@@ -89,15 +92,15 @@ void ThreadFunction() {
     DispatchMessage(&msg);
 	}
 
-	exit(0);
+  RemoveTrayIcon();
+  gui_finished.store(true);
 }
 
 }
 
-void SetupTray() {
+void RunGUI() {
   ShowWindow(GetConsoleWindow(), 0);
-  std::thread(ThreadFunction).detach();
-  atexit(RemoveTrayIcon);
+  ThreadFunction();
 }
 
 void ShowWindow() {

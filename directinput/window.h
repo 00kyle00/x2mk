@@ -1,4 +1,4 @@
 #pragma once
 
-void SetupTray();
+void RunGUI();
 void ShowWindow();

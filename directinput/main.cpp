@@ -4,6 +4,7 @@
 #include "state.h"
 #include "window.h"
 
+#include <thread>
 #include <memory>
 #include <cstdlib>
 #include <vector>
@@ -11,6 +12,9 @@
 #include <algorithm>
 #include <iostream>
 #include <stdexcept>
+#include <atomic>
+
+std::atomic<bool> gui_finished(false);
 
 void print_exception_info() {
   try {
@@ -25,7 +29,7 @@ void print_exception_info() {
 }
 
 int main() {
-  SetupTray();
+  std::thread gui_thread(RunGUI);
 
   try {
     //initialize stuff
@@ -51,7 +55,7 @@ int main() {
     auto L = CreateLua(&prog_state);
     ExecuteScript(L, "controller.lua");
 
-    while(true) {
+    while(!gui_finished.load()) {
       // Gather state.
       InputState& input = *prog_state.state;
       ctl->query_state(input);
@@ -80,6 +84,13 @@ int main() {
   catch(...) {
     print_exception_info();
     ShowWindow();
+    // Notify gui thread that we are done.
+    // Not technically sound (WM_QUIT is not a normal message), but should do.
+    PostThreadMessage(
+      GetThreadId(gui_thread.native_handle()), WM_QUIT, 0, 0);
+
     system("pause");
   }
+  
+  gui_thread.join();
 }

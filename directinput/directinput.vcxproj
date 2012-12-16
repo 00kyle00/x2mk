@@ -64,19 +64,31 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>MinSpace</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_SECURE_SCL=0;_HAS_ITERATOR_DEBUGGING=0;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>false</SDLCheck>
       <AdditionalIncludeDirectories>..\lua-5.2.1\src</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4146</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -115,14 +127,12 @@
     <ClCompile Include="controller.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="luabind.cpp" />
-    <ClCompile Include="options.cpp" />
     <ClCompile Include="virtual_devices.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="controller.h" />
     <ClInclude Include="luabind.h" />
-    <ClInclude Include="options.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="virtual_devices.h" />
     <ClInclude Include="window.h" />
@@ -133,10 +143,10 @@
     <None Include="utilities.lua" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="directinput.rc" />
+    <Image Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="icon.ico" />
+    <ResourceCompile Include="directinput.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
