@@ -13,15 +13,15 @@ end
 
 -- reloads specified module
 function reload(what)
-	package.loaded[what] = nil
-	require(what)
+  package.loaded[what] = nil
+  require(what)
 end
 
 
 if directory_exists('%windir%\\SysWOW64') then
-	path_to_cmd = '%windir%\\Sysnative\\cmd.exe'
+  path_to_cmd = '%windir%\\Sysnative\\cmd.exe'
 else
-	path_to_cmd = '%windir%\\System32\\cmd.exe'
+  path_to_cmd = '%windir%\\System32\\cmd.exe'
 end
 
 -- spawns a process

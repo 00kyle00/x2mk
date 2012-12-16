@@ -66,31 +66,31 @@ LRESULT CALLBACK WndProcedure(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 
 void ThreadFunction() {
   LPCTSTR className = L"dummy_class_name";
-	WNDCLASSEX wndclass;
-	wndclass.cbSize        = sizeof(WNDCLASSEX);
-	wndclass.style         = CS_HREDRAW | CS_VREDRAW;
-	wndclass.lpfnWndProc   = WndProcedure;
-	wndclass.cbClsExtra    = 0;
-	wndclass.cbWndExtra    = 0;
-	wndclass.hIcon         = LoadIcon(NULL, IDI_APPLICATION);
-	wndclass.hCursor       = LoadCursor(NULL, IDC_ARROW);
-	wndclass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
-	wndclass.lpszMenuName  = NULL;
-	wndclass.lpszClassName = className;
-	wndclass.hInstance     = GetModuleHandle(0);
-	wndclass.hIconSm       = LoadIcon(NULL, IDI_APPLICATION);
-	RegisterClassEx(&wndclass);
+  WNDCLASSEX wndclass;
+  wndclass.cbSize        = sizeof(WNDCLASSEX);
+  wndclass.style         = CS_HREDRAW | CS_VREDRAW;
+  wndclass.lpfnWndProc   = WndProcedure;
+  wndclass.cbClsExtra    = 0;
+  wndclass.cbWndExtra    = 0;
+  wndclass.hIcon         = LoadIcon(NULL, IDI_APPLICATION);
+  wndclass.hCursor       = LoadCursor(NULL, IDC_ARROW);
+  wndclass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+  wndclass.lpszMenuName  = NULL;
+  wndclass.lpszClassName = className;
+  wndclass.hInstance     = GetModuleHandle(0);
+  wndclass.hIconSm       = LoadIcon(NULL, IDI_APPLICATION);
+  RegisterClassEx(&wndclass);
 
-	hWnd = CreateWindow(className, L"none", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT,
-	  CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, NULL, NULL, GetModuleHandle(0), NULL);
-	
+  hWnd = CreateWindow(className, L"none", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT,
+    CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, NULL, NULL, GetModuleHandle(0), NULL);
+  
   TrayIcon(hWnd, true);
 
-	MSG msg;
-	while(GetMessage(&msg,NULL,0,0)) {
+  MSG msg;
+  while(GetMessage(&msg,NULL,0,0)) {
     TranslateMessage(&msg);
     DispatchMessage(&msg);
-	}
+  }
 
   RemoveTrayIcon();
   gui_finished.store(true);
